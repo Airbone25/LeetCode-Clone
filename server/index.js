@@ -11,6 +11,7 @@ const problems = [
     id: 1,
     title: 'Add One',
     description: 'Write a function that takes in a number and returns that number plus one.',
+    inputs: ['a'],
     testCases: [
       {input: [1], output: 2},
       {input: [2], output: 3},
@@ -21,6 +22,7 @@ const problems = [
     id: 2,
     title: 'Sum of Two',
     description: 'Write a function that takes in two numbers and return the sum of the two numbers.',
+    inputs: ['a', 'b'],
     testCases: [
       {input: [1, 2], output: 3},
       {input: [2, 3], output: 5},
