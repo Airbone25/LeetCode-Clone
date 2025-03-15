@@ -17,7 +17,7 @@ export default function ProblemPage() {
         if(!problem){
           return
         }
-        const res = await fetch('http://localhost:3000/code',{
+        const res = await fetch('https://leetcode-clone-ao0616y40-airbone25s-projects.vercel.app/code',{
           method: 'POST',
           headers:{
             'Content-Type':'application/json'
@@ -34,7 +34,7 @@ export default function ProblemPage() {
     },[])
 
     async function getProblem(id){
-        const res = await fetch(`http://localhost:3000/problems/${id}`)
+        const res = await fetch(`https://leetcode-clone-ao0616y40-airbone25s-projects.vercel.app/problems/${id}`)
         const data = await res.json()
         console.log(data)
         setProblem(data)
@@ -43,10 +43,10 @@ export default function ProblemPage() {
     }
 
   return (
-    <div>
-        <div>
-            <h1>{problem && problem.title}</h1>
-            <p>{problem && problem.description}</p>
+    <div className='p-4 flex'>
+        <div className='w-1/2'>
+            <h1 className='text-4xl'>{problem && problem.title}</h1>
+            <p className=''>{problem && problem.description}</p>
         </div>
         <CodeEditor runCode={runCode} value={value} onChange={onChange} result={result}/>
         <div className='flex'>

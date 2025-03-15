@@ -4,13 +4,14 @@ import { javascript } from "@codemirror/lang-javascript";
 function CodeEditor({runCode, value, onChange}) {
   return (
     <div>
+        <button className="p-1 border-2 rounded-lg mb-5" onClick={runCode}>Submit</button>
         <CodeMirror
           value={value}
           height="200px"
           extensions={[javascript()]}
           onChange={onChange}
         />
-        <button className="px-2 py-4 border-2 rounded-lg" onClick={runCode}>Submit</button>
+        
     </div>
   )
 }
