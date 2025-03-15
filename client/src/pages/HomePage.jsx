@@ -6,7 +6,7 @@ export default function HomePage() {
     const [problems,setProblems] = useState()
 
     async function getProblems(){
-        const res = await fetch('https://leetcode-clone-ao0616y40-airbone25s-projects.vercel.app/problems')
+        const res = await fetch('https://leetcode-clone-api-umber.vercel.app/problems')
         const data = await res.json()
         setProblems(data)
     }

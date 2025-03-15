@@ -17,7 +17,7 @@ export default function ProblemPage() {
         if(!problem){
           return
         }
-        const res = await fetch('https://leetcode-clone-ao0616y40-airbone25s-projects.vercel.app/code',{
+        const res = await fetch('https://leetcode-clone-api-umber.vercel.app/code',{
           method: 'POST',
           headers:{
             'Content-Type':'application/json'
@@ -34,7 +34,7 @@ export default function ProblemPage() {
     },[])
 
     async function getProblem(id){
-        const res = await fetch(`https://leetcode-clone-ao0616y40-airbone25s-projects.vercel.app/problems/${id}`)
+        const res = await fetch(`https://leetcode-clone-api-umber.vercel.app/problems/${id}`)
         const data = await res.json()
         console.log(data)
         setProblem(data)
