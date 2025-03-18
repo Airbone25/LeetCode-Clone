@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LeetCode from "../assets/LeetCode.png";
 import "./HomePage.css";
 
 export default function HomePage() {
@@ -20,7 +21,7 @@ return (
         <header className="homepage-header">
             <nav className="homepage-nav">
                 <div className="logo">
-                    <img src="your-logo.png" alt="Logo" />
+                    <img src= { LeetCode} alt="Logo" />
                 </div>
                 <div className="nav-links">
                     <Link className="nav-link active" to="/home">Home</Link>
