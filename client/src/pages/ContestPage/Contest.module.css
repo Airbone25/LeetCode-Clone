@@ -1,0 +1,111 @@
+.contestContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+    color: #1a1a1a;
+  }
+  
+  .stats {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .statItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+  }
+  
+  .contestList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .contestCard {
+    background: white;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+  
+  .contestCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .contestInfo h2 {
+    font-size: 1.25rem;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+  }
+  
+  .contestDetails {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .detailItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .contestActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .status {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .upcoming {
+    background: #e3f2fd;
+    color: #1976d2;
+  }
+  
+  .completed {
+    background: #f5f5f5;
+    color: #666;
+  }
+  
+  .registerButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #2cbb5d;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .registerButton:hover {
+    background: #249e4f;
+  }
