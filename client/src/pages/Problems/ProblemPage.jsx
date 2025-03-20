@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import CodeEditor from "../components/CodeEditor";
+import CodeEditor from "../../components/CodeEditor";
 
 export default function ProblemPage() {
 
@@ -17,7 +17,7 @@ export default function ProblemPage() {
         if(!problem){
           return
         }
-        const res = await fetch('https://leetcode-clone-api-umber.vercel.app/code',{
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/code`,{
           method: 'POST',
           headers:{
             'Content-Type':'application/json'
@@ -34,7 +34,7 @@ export default function ProblemPage() {
     },[])
 
     async function getProblem(id){
-        const res = await fetch(`https://leetcode-clone-api-umber.vercel.app/problems/${id}`)
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/problems/${id}`)
         const data = await res.json()
         console.log(data)
         setProblem(data)
