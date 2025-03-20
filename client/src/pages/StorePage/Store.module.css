@@ -1,0 +1,114 @@
+.storeContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .coinsBalance {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #2d2d2d;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .coinIcon {
+    color: #ffd700;
+    font-size: 1.5rem;
+  }
+  
+  .coinAmount {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  
+  .productsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  
+  .productCard {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .productCard:hover {
+    transform: translateY(-4px);
+  }
+  
+  .productImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .productInfo {
+    padding: 1.5rem;
+  }
+  
+  .productName {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .productDescription {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .productFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .price {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #ffd700;
+    font-weight: 600;
+  }
+  
+  .buyButton {
+    background: #1890ff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s ease;
+  }
+  
+  .buyButton:hover {
+    background: #096dd9;
+  }
+  
+  .buyButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .outOfStock {
+    color: #ff4d4f;
+    font-weight: 500;
+  } 
