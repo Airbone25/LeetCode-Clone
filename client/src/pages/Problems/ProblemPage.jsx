@@ -25,7 +25,6 @@ export default function ProblemPage() {
           body: JSON.stringify({code:value,id: problem.id})
         })
         const results = await res.json()
-        console.log(results)
         setResult(results)
     }
 
@@ -36,7 +35,6 @@ export default function ProblemPage() {
     async function getProblem(id){
         const res = await fetch(`${import.meta.env.VITE_API_URL}/problems/${id}`)
         const data = await res.json()
-        console.log(data)
         setProblem(data)
         setValue(`function outputFunction(${data.inputs.map((vr)=>vr).join(',')}){\n\t\n}`)
         setResult()
