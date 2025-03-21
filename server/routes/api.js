@@ -59,7 +59,7 @@ const problems = [
   },
   {
     id: 6,
-    title: 'Reemove Nth Node From End of List',
+    title: 'Remove Nth Node From End of List',
     description: 'Write a function that takes in a linked list and an integer and removes the nth node from the end of the list.',
     inputs: ['head', 'n'],
     testCases: [

@@ -3,18 +3,59 @@ import { Code2, Eye, EyeOff, Github } from 'lucide-react';
 import styles from './Sign.module.css';
 
 const Sign = () => {
+  const [username,setUsername] = useState('')
+  const [password,setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false); // Toggle between Sign In & Sign Up
-  const [formData, setFormData] = useState({ username: '', password: '', confirmPassword: '' });
+  const [isSignUp, setIsSignUp] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  async function postSignup(value){
+    try{
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(value)
+      })
+      const data = await res.json()
+      console.log(data)
+    }catch(err){
+      console.error(err)
+    }
+  }
+
+  async function postLogin(value){
+    try{
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(value)
+      })
+      const data = await res.json()
+      console.log(data)
+    }catch(err){
+      console.error(err)
+    }
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(isSignUp ? 'Sign Up Data:' : 'Sign In Data:', formData);
+    const data = {
+      username,
+      password
+    };
+    console.log(data)
+
+    if(isSignUp){
+      postSignup(data)
+    }
+    if(!isSignUp){
+      postLogin(data)
+    }
+
   };
 
   return (
@@ -35,9 +76,9 @@ const Sign = () => {
                 <input
                   type="text"
                   name="username"
-                  placeholder="Username or E-mail"
+                  placeholder="Enter a unique username"
                   className={styles.inputField}
-                  onChange={handleChange}
+                  onChange={(e)=>setUsername(e.target.value)}
                   required
                 />
               </div>
@@ -47,7 +88,7 @@ const Sign = () => {
                   name="password"
                   placeholder="Password"
                   className={styles.inputField}
-                  onChange={handleChange}
+                  onChange={(e)=>setPassword(e.target.value)}
                   required
                 />
                 <button
@@ -67,7 +108,13 @@ const Sign = () => {
                     name="confirmPassword"
                     placeholder="Confirm Password"
                     className={styles.inputField}
-                    onChange={handleChange}
+                    onChange={(e)=>{
+                      if(e.target.value !== password){
+                        e.target.setCustomValidity('Passwords do not match!')
+                      }else{
+                        e.target.setCustomValidity('')
+                      }
+                    }}
                     required
                   />
                 </div>
