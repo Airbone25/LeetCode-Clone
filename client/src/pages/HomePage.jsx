@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Trophy, Brain, Target, Siren as Fire, Bell, User, Mail, Star, TrendingUp } from 'lucide-react';
 import styles from './HomePage.module.css';
-import LeetCode from "../assets/LeetCode.png";
+import LeetCode from "../assets/leetcode.png";
 import { UserContext } from "../contexts/UserContext";
 
 export default function HomePage() {
