@@ -10,6 +10,14 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    solved: {
+        type: Number,
+        default: 0
+    },
+    attempted: {
+        type: Number,
+        default: 0
     }
 })
 

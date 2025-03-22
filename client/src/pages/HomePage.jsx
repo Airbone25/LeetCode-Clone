@@ -1,32 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Trophy, Brain, Target, Siren as Fire, Bell, User, Mail, Star, TrendingUp } from 'lucide-react';
 import styles from './HomePage.module.css';
 import LeetCode from "../assets/LeetCode.png";
+import { UserContext } from "../contexts/UserContext";
 
 export default function HomePage() {
-  const [problems, setProblems] = useState();
   const [stats, setStats] = useState({
-    solved: 235,
-    totalProblems: 2547,
-    ranking: 254879,
-    contestRating: 1523,
-    streak: 15
+    solved: 2,
+    attempted: 4
   });
 
   const [email, setEmail] = useState('');
   const [showWelcome, setShowWelcome] = useState(true);
   const [subscribeStatus, setSubscribeStatus] = useState('');
 
-  async function getProblems() {
-    const res = await fetch("https://leetcode-clone-api-umber.vercel.app/problems");
-    const data = await res.json();
-    setProblems(data);
+  const context = useContext(UserContext)
+  const token = JSON.parse(localStorage.getItem('token'))
+
+  async function fetchStats(){
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/stats`,{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token.token}`
+      }
+    })
+    const data = await res.json()
+    setStats(data)
   }
 
   useEffect(() => {
-    getProblems();
-    const timer = setTimeout(() => setShowWelcome(false), 5000);
+    const timer = setTimeout(() => setShowWelcome(false), 3000);
+    if(context.user){
+      fetchStats()
+    }
     return () => clearTimeout(timer);
   }, []);
 
@@ -37,6 +44,11 @@ export default function HomePage() {
       setEmail('');
     }
   };
+
+  function handleLogout() {
+    localStorage.removeItem('token');
+    context.setUser(null);
+  }
 
   return (
     <div className={styles.homepage}>
@@ -59,7 +71,8 @@ export default function HomePage() {
           </div>
           <div className={styles.rightIcons}>
 
-            <Link className={styles.signUpButton} to="/signup">Sign Up</Link>
+            {!context.user && <Link className={styles.signUpButton} to="/signup">Sign Up</Link>}
+            {context.user && <button onClick={handleLogout} className={styles.signUpButton}>Logout</button>}
           </div>
         </nav>
       </header>
@@ -74,33 +87,29 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className={styles.stats}>
+        <section style={{"display": `${!context.user ? "none" : "grid"}`}} className={styles.stats}>
           <div className={styles.statCard}>
             <Brain size={24} />
-            <h3>Your Problem-Solving Journey</h3>
-            <p>{stats.solved} / {stats.totalProblems}</p>
+            <h3>Problems Solved</h3>
+            <p>{stats.solved} / 11</p>
             <div className={styles.statProgress}>
               <div className={styles.progressBar}>
-                <div className={styles.progressFill} style={{ width: `${(stats.solved/stats.totalProblems) * 100}%` }}></div>
+                <div className={styles.progressFill} style={{ width: `${(stats.solved/11) * 100}%` }}></div>
               </div>
             </div>
             <span className={styles.encouragement}>Keep going! You're doing great! </span>
           </div>
           <div className={styles.statCard}>
             <Trophy size={24} />
-            <h3>Contest Champion Status</h3>
-            <p>{stats.contestRating}</p>
-            <span className={styles.ratingTrend}>
-              <TrendingUp size={16} /> +25 this week 📈
-            </span>
-            <span className={styles.encouragement}>On fire! Keep climbing! </span>
+            <h3>Problems Attempted</h3>
+            <p>{stats.attempted}/11</p>
+            <span className={styles.encouragement}>You miss every shot you don't take</span>
           </div>
           <div className={styles.statCard}>
             <Target size={24} />
-            <h3>Global Standing</h3>
-            <p>#{stats.ranking}</p>
-            <span className={styles.rankImprovement}>Top 15% </span>
-            <span className={styles.encouragement}>You're among the stars! </span>
+            <h3>Accuracy</h3>
+            <p>{(stats.solved/stats.attempted)*100}%</p>
+            <span className={styles.encouragement}>Accuracy is the key </span>
           </div>
         </section>
 

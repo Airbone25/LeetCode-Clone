@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './Problemspage.css'; 
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const ProblemsList = () => {
   const [problems, setProblems] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-
-    const fetchProblems = async () => {
-      const data = [
-        { id: 1, title: "Two Sum", difficulty: "Easy", status: "Completed" },
-        { id: 2, title: "Three Sum", difficulty: "Medium", status: "In Progress" },
-        { id: 3, title: "Longest Substring Without Repeating Characters", difficulty: "Hard", status: "Not Started" },
-        { id: 4, title: "Median of Two Sorted Arrays", difficulty: "Medium", status: "Completed" },
-        { id: 5, title: "Longest Palindromic Substring", difficulty: "Hard", status: "In Progress" },
-        { id: 6, title: "Remove Nth Node From End of List", difficulty: "Easy", status: "Not Started" },
-        { id: 7, title: "Reverse Integer", difficulty: "Medium", status: "Completed" },
-        { id: 8, title: "String to Integer (atoi)", difficulty: "Hard", status: "In Progress" },
-        { id: 9, title: "Palindrome Number", difficulty: "Easy", status: "Not Started" },
-        { id: 10, title: "Regular Expression Matching", difficulty: "Hard", status: "Completed" }
-      ];
+  const fetchProblems = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/problems`);
+      const data = await response.json();
+      console.log(data);
       setProblems(data);
-    };
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
     fetchProblems();
   }, []);
 
@@ -29,9 +26,18 @@ const ProblemsList = () => {
     problem.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const getDifficultyClass = (difficulty) => {
+    switch (difficulty.toLowerCase()) {
+      case 'easy': return 'tag-easy';
+      case 'medium': return 'tag-medium';
+      case 'hard': return 'tag-hard';
+      default: return '';
+    }
+  };
+
   return (
-    <div className="problems-list">
-      <h1>Problems List</h1>
+    <div className="problems-container">
+      <h1 className="title">Problems List</h1>
 
       {/* Search Bar */}
       <input
@@ -43,22 +49,24 @@ const ProblemsList = () => {
       />
 
       {/* Problems Table */}
-      <table>
+      <table className="problems-table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Title</th>
             <th>Difficulty</th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {filteredProblems.map(problem => (
-            <tr key={problem.id}>
+          {filteredProblems.map((problem) => (
+            <tr key={problem.id} className="problem-row">
               <td>{problem.id}</td>
-              <td>{problem.title}</td>
-              <td>{problem.difficulty}</td>
-              <td>{problem.status}</td>
+              <td className="problem-title"><Link to={`/problems/${problem.id}`}>{problem.title}</Link></td>
+              <td>
+                <span className={`difficulty-tag ${getDifficultyClass(problem.difficulty)}`}>
+                  {problem.difficulty}
+                </span>
+              </td>
             </tr>
           ))}
         </tbody>

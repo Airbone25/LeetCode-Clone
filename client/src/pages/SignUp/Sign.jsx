@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Code2, Eye, EyeOff, Github } from 'lucide-react';
+import { toast, ToastContainer } from 'react-toastify';
 import styles from './Sign.module.css';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
 
 const Sign = () => {
   const [username,setUsername] = useState('')
   const [password,setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+
+  const navigate = useNavigate()
+
+  const context = useContext(UserContext)
 
   async function postSignup(value){
     try{
@@ -18,9 +25,19 @@ const Sign = () => {
         body: JSON.stringify(value)
       })
       const data = await res.json()
-      console.log(data)
+      if(data.token){
+        console.log(data)
+        localStorage.setItem('token',JSON.stringify(data))
+        context.setUser(localStorage.getItem('token'))
+        toast.success("Signup Successful")
+        navigate('/')
+      }
+      if(data.error){
+        toast.error(data.error)
+      }
     }catch(err){
       console.error(err)
+      toast.error("Error Signing Up")
     }
   }
 
@@ -34,9 +51,19 @@ const Sign = () => {
         body: JSON.stringify(value)
       })
       const data = await res.json()
-      console.log(data)
+      if(data.token){
+        console.log(data)
+        localStorage.setItem('token',JSON.stringify(data))
+        context.setUser(localStorage.getItem('token'))
+        toast.success("Login Successful")
+        navigate('/')
+      }
+      if(data.error){
+        toast.error(data.error)
+      }
     }catch(err){
       console.error(err)
+      toast.error("Error Logging In")
     }
   }
 
@@ -51,9 +78,13 @@ const Sign = () => {
 
     if(isSignUp){
       postSignup(data)
+      setUsername('')
+      setPassword('')
     }
     if(!isSignUp){
       postLogin(data)
+      setUsername('')
+      setPassword('')
     }
 
   };
@@ -201,6 +232,7 @@ const Sign = () => {
           </div>
         </div>
       </footer>
+      <ToastContainer />
     </div>
   );
 };

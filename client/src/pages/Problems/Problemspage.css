@@ -1,38 +1,106 @@
-.problems-list {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .search-bar {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
-  
-  tr:hover {
-    background-color: #f9f9f9;
-  }
-  
+/* Container and header */
+.problems-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Search bar */
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 5px #0070f3;
+}
+
+/* Table styling */
+.problems-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.problems-table th, .problems-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.problems-table th {
+  background: #f0f0f0;
+  font-weight: 600;
+}
+
+.problem-row:hover {
+  background: #f9f9f9;
+  transition: 0.3s;
+}
+
+.problem-title {
+  font-weight: 600;
+  color: #0070f3;
+  cursor: pointer;
+}
+
+.problem-title:hover {
+  text-decoration: underline;
+}
+
+/* Difficulty tags */
+.difficulty-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+.tag-easy {
+  background-color: #28a745;
+}
+
+.tag-medium {
+  background-color: #ffc107;
+}
+
+.tag-hard {
+  background-color: #dc3545;
+}
+
+/* Status icons */
+.status-icon {
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.solved {
+  color: #28a745;
+}
+
+.unsolved {
+  color: #dc3545;
+}
