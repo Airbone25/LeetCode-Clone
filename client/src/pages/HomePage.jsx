@@ -108,7 +108,7 @@ export default function HomePage() {
           <div className={styles.statCard}>
             <Target size={24} />
             <h3>Accuracy</h3>
-            <p>{(stats.solved/stats.attempted)*100}%</p>
+            <p>{stats.solved != 0 ? (stats.solved / stats.attempted) * 100 : 0}%</p>
             <span className={styles.encouragement}>Accuracy is the key </span>
           </div>
         </section>
